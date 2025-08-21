@@ -45,8 +45,6 @@ Setup Instructions
 
 ### 1\. Clone and Setup
 
-bash
-
 # Clone the repository
 git clone <repository-url>
 cd file-parser-api
@@ -62,8 +60,6 @@ mvn spring-boot:run
 The application will start on `http://localhost:8080`
 
 Check if it's working:
-
-bash
 
 curl http://localhost:8080/api/files
 
@@ -90,13 +86,9 @@ Content-Type: `multipart/form-data`
 
 Request:
 
-bash
-
 curl -X POST -F "file=@test.csv" http://localhost:8080/api/files
 
 Response:
-
-json
 
 {
 "file_id": "10b65b39-b2a2-4bcc-ad8f-6bde164251a7",
@@ -109,15 +101,11 @@ Endpoint: `GET /api/files/{file_id}/progress`
 
 Request:
 
-bash
-
 curl http://localhost:8080/api/files/10b65b39-b2a2-4bcc-ad8f-6bde164251a7/progress
 
 Response Examples:
 
 During processing:
-
-json
 
 {
 "file_id": "10b65b39-b2a2-4bcc-ad8f-6bde164251a7",
@@ -126,8 +114,6 @@ json
 }
 
 After completion:
-
-json
 
 {
 "file_id": "10b65b39-b2a2-4bcc-ad8f-6bde164251a7",
@@ -141,23 +127,17 @@ Endpoint: `GET /api/files/{file_id}`
 
 Request:
 
-bash
-
 curl http://localhost:8080/api/files/10b65b39-b2a2-4bcc-ad8f-6bde164251a7
 
 Response Examples:
 
 If processing is not complete:
 
-json
-
 {
 "message": "File upload or processing in progress. Please try again later."
 }
 
 If processing is complete:
-
-json
 
 {
 "file_id": "10b65b39-b2a2-4bcc-ad8f-6bde164251a7",
@@ -185,13 +165,9 @@ Endpoint: `GET /api/files`
 
 Request:
 
-bash
-
 curl http://localhost:8080/api/files
 
 Response:
-
-json
 
 [
 {
@@ -212,13 +188,9 @@ Endpoint: `DELETE /api/files/{file_id}`
 
 Request:
 
-bash
-
 curl -X DELETE http://localhost:8080/api/files/10b65b39-b2a2-4bcc-ad8f-6bde164251a7
 
 Response:
-
-json
 
 {
 "message": "File deleted successfully"
@@ -229,15 +201,11 @@ Error Responses
 
 File Not Found:
 
-json
-
 {
 "message": "File not found"
 }
 
 Unsupported File Type:
-
-json
 
 {
 "message": "Only CSV files are supported for parsing."
@@ -245,7 +213,6 @@ json
 
 Internal Server Error:
 
-json
 
 {
 "message": "Could not upload the file: [error details]"
@@ -313,8 +280,6 @@ Sample Test Files
 
 Create a sample CSV file (`test.csv`) for testing:
 
-csv
-
 name,email,age,department
 John Doe,john@example.com,30,Engineering
 Jane Smith,jane@example.com,25,Marketing
@@ -325,13 +290,9 @@ Testing
 
 ### Run Unit Tests
 
-bash
-
 mvn test
 
 ### Test with CURL
-
-bash
 
 # Upload a file
 curl -X POST -F "file=@test.csv" http://localhost:8080/api/files
@@ -353,8 +314,6 @@ Configuration
 
 The application uses the following configuration in `application.properties`:
 
-properties
-
 # Server configuration
 server.port=8080
 
@@ -372,4 +331,5 @@ spring.jpa.show-sql=true
 
 # File upload settings
 spring.servlet.multipart.max-file-size=10GB
+
 spring.servlet.multipart.max-request-size=10GB
